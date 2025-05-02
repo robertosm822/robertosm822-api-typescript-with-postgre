@@ -7,12 +7,31 @@ const product_entity_1 = require("@/entities/product.entity");
 const connection_1 = __importDefault(require("@/database/connection"));
 const class_validator_1 = require("class-validator");
 const product_repository_1 = require("@/repositories/product.repository");
+const create_product_dto_1 = __importDefault(require("@/dto/create.product.dto"));
 class ProductController {
     constructor() {
         this.findAll = async (request, response) => {
             const products = await this.productRepository.getAll();
             return response.status(200).send({
                 data: products,
+            });
+        };
+        this.create = async (request, response) => {
+            const productRepository = connection_1.default.getRepository(product_entity_1.Product);
+            const { name, description, weight } = request.body;
+            const dtoProduct = new create_product_dto_1.default();
+            dtoProduct.name = name;
+            dtoProduct.description = description;
+            dtoProduct.weight = weight;
+            const errors = await (0, class_validator_1.validate)(dtoProduct);
+            if (errors.length > 0) {
+                return response.status(422).send({
+                    errors,
+                });
+            }
+            await this.productRepository.create(dtoProduct);
+            return response.status(201).send({
+                data: dtoProduct,
             });
         };
         this.productRepository = new product_repository_1.ProductRepository();
@@ -31,24 +50,6 @@ class ProductController {
                 data: product,
             });
         }
-    }
-    async create(request, response, next) {
-        const productRepository = connection_1.default.getRepository(product_entity_1.Product);
-        const { name, description, weight } = request.body;
-        const product = new product_entity_1.Product();
-        product.name = name;
-        product.description = description;
-        product.weight = weight;
-        const errors = await (0, class_validator_1.validate)(product);
-        if (errors.length > 0) {
-            return response.status(422).send({
-                errors,
-            });
-        }
-        const prodDB = await productRepository.save(product);
-        return response.status(201).send({
-            data: prodDB,
-        });
     }
     async update(request, response) {
         const productRepository = connection_1.default.getRepository(product_entity_1.Product);

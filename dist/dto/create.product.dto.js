@@ -9,41 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
-const typeorm_1 = require("typeorm");
-const uuid_1 = require("uuid");
-let Product = class Product {
-    constructor() {
-        if (!this.id) {
-            this.id = (0, uuid_1.v4)();
-        }
-    }
-};
-exports.Product = Product;
+const class_validator_1 = require("class-validator");
+class CreateProductDTO {
+}
+exports.default = CreateProductDTO;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid', { name: 'id' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.Length)(3, 255),
     __metadata("design:type", String)
-], Product.prototype, "id", void 0);
+], CreateProductDTO.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.Length)(3, 255),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
+], CreateProductDTO.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Product.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], Product.prototype, "weight", void 0);
-__decorate([
-    (0, typeorm_1.CreateDateColumn)({
-        name: 'created_at',
-        type: 'timestamp'
-    }),
-    __metadata("design:type", Date)
-], Product.prototype, "createdAt", void 0);
-exports.Product = Product = __decorate([
-    (0, typeorm_1.Entity)('products'),
-    __metadata("design:paramtypes", [])
-], Product);
+], CreateProductDTO.prototype, "weight", void 0);

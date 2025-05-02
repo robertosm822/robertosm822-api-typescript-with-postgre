@@ -4,6 +4,7 @@ import AppDataSource from "@/database/connection";
 import { Repository } from "typeorm";
 import { validate } from "class-validator";
 import { ProductRepository } from "@/repositories/product.repository";
+import CreateProductDTO from "@/dto/create.product.dto";
 
 class ProductController {
   private productRepository: ProductRepository;
@@ -35,31 +36,27 @@ class ProductController {
     }
   }
 
-  async create(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
+  create = async ( request: Request,response: Response ): Promise<any> => {
     const productRepository = AppDataSource.getRepository(Product);
 
     const { name, description, weight } = request.body;
 
-    const product = new Product();
-    product.name = name;
-    product.description = description;
-    product.weight = weight;
+    const dtoProduct = new CreateProductDTO();
+    dtoProduct.name = name;
+    dtoProduct.description = description;
+    dtoProduct.weight = weight;
 
-    const errors = await validate(product);
+    const errors = await validate(dtoProduct);
     if (errors.length > 0) {
       return response.status(422).send({
         errors,
       });
     }
 
-    const prodDB = await productRepository.save(product);
+    await this.productRepository.create(dtoProduct);
 
     return response.status(201).send({
-      data: prodDB,
+      data: dtoProduct,
     });
   }
 

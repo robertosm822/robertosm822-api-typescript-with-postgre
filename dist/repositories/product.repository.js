@@ -13,5 +13,12 @@ class ProductRepository {
     async getAll() {
         return await this.repository.find();
     }
+    async create(input) {
+        const product = new product_entity_1.Product();
+        product.name = input.name;
+        product.description = input.description;
+        product.weight = input.weight;
+        return this.repository.save(input);
+    }
 }
 exports.ProductRepository = ProductRepository;
