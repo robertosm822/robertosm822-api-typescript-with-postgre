@@ -9,7 +9,7 @@ const routes = (0, express_1.Router)();
 routes.post("/api/products", product_controller_1.default.create);
 routes.get("/api/products", (req, res) => { product_controller_1.default.findAll(req, res); });
 routes.get("/api/products/:id", product_controller_1.default.findOne);
-routes.put("/api/products/:id", product_controller_1.default.update);
+routes.put("/api/products/:id", (req, res) => { product_controller_1.default.update(req, res); });
 routes.delete("/api/products/:id", product_controller_1.default.delete);
 routes.get(/.*/, (_, response) => {
     response.status(404).send({

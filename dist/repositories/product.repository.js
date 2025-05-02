@@ -26,5 +26,15 @@ class ProductRepository {
     async delete(id) {
         await this.repository.delete(id);
     }
+    async update(input) {
+        const product = await this.find(input.id);
+        if (!product) {
+            return null;
+        }
+        product.name = input.name;
+        product.description = input.description;
+        product.weight = input.weight;
+        return await this.repository.save(product);
+    }
 }
 exports.ProductRepository = ProductRepository;
