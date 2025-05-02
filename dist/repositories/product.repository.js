@@ -23,5 +23,8 @@ class ProductRepository {
     async find(id) {
         return await this.repository.findOneBy({ id });
     }
+    async delete(id) {
+        await this.repository.delete(id);
+    }
 }
 exports.ProductRepository = ProductRepository;

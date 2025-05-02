@@ -16,6 +16,20 @@ class ProductController {
                 data: products,
             });
         };
+        this.findOne = async (request, response) => {
+            const id = request.params.id;
+            const product = await this.productRepository.find(id);
+            if (!product) {
+                response.status(404).send({
+                    error: "Product not found",
+                });
+            }
+            else {
+                response.status(200).send({
+                    data: product,
+                });
+            }
+        };
         this.create = async (request, response) => {
             const productRepository = connection_1.default.getRepository(product_entity_1.Product);
             const { name, description, weight } = request.body;
@@ -35,20 +49,6 @@ class ProductController {
             });
         };
         this.productRepository = new product_repository_1.ProductRepository();
-    }
-    async findOne(request, response) {
-        const id = request.params.id;
-        const product = await this.productRepository.find(id);
-        if (!product) {
-            response.status(404).send({
-                error: "Product not found",
-            });
-        }
-        else {
-            response.status(200).send({
-                data: product,
-            });
-        }
     }
     async update(request, response) {
         const productRepository = connection_1.default.getRepository(product_entity_1.Product);
@@ -85,10 +85,9 @@ class ProductController {
         }
     }
     async delete(request, response) {
-        const productRepository = connection_1.default.getRepository(product_entity_1.Product);
         const id = request.params.id;
         try {
-            await productRepository.delete(id);
+            await this.productRepository.delete(id);
             response.status(204).send();
         }
         catch (error) {
