@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Product } from "@/entities/product.entity";
 import AppDataSource from "@/database/connection";
-import { Repository } from "typeorm";
 import { validate } from "class-validator";
 import { ProductRepository } from "@/repositories/product.repository";
 import CreateProductDTO from "@/dto/create.product.dto";

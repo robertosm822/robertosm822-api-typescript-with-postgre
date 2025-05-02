@@ -2,7 +2,7 @@ import AppDataSource from "@/database/connection";
 import CreateProductDTO from "@/dto/create.product.dto";
 import { UpdateProductDTO } from "@/dto/update.product.dto";
 import { Product } from "@/entities/product.entity";
-import { Repository, ReturnDocument } from "typeorm";
+import { Repository } from "typeorm";
 
 export class ProductRepository {
     private repository: Repository<Product>;
