@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only src/index.ts nodemon",
+    "dev": "ts-node-dev --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "tsc && ts-node-dev --transpile-only src/index.ts",
     "test": "jest --watchAll"
   },
   "keywords": [],
