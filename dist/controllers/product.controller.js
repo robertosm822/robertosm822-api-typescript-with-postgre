@@ -37,9 +37,8 @@ class ProductController {
         this.productRepository = new product_repository_1.ProductRepository();
     }
     async findOne(request, response) {
-        const productRepository = connection_1.default.getRepository(product_entity_1.Product);
         const id = request.params.id;
-        const product = await productRepository.findOneBy({ id });
+        const product = await this.productRepository.find(id);
         if (!product) {
             response.status(404).send({
                 error: "Product not found",

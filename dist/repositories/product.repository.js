@@ -20,5 +20,8 @@ class ProductRepository {
         product.weight = input.weight;
         return this.repository.save(input);
     }
+    async find(id) {
+        return await this.repository.findOneBy({ id });
+    }
 }
 exports.ProductRepository = ProductRepository;

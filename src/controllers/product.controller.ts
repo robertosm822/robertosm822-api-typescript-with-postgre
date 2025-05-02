@@ -8,9 +8,11 @@ import CreateProductDTO from "@/dto/create.product.dto";
 
 class ProductController {
   private productRepository: ProductRepository;
+  
   constructor() {
     this.productRepository = new ProductRepository();
   }
+
   findAll = async (request: Request,response: Response ): Promise<Response> => {
     
     const products = await this.productRepository.getAll();
@@ -20,7 +22,7 @@ class ProductController {
     });
   }
 
-  async findOne(request: Request, response: Response): Promise<void> {
+  findOne = async (request: Request, response: Response): Promise<void> => {
 
     const id: string = request.params.id;
 
