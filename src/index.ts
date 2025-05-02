@@ -5,8 +5,8 @@ import cors from 'cors';
 
 import dotenv from 'dotenv'
 dotenv.config()
-import "@/database/connection";
-import routes from '@/routes';
+import "./database/connection";
+import routes from './routes';
 
 const PORT = process.env.POST || 8091;
 

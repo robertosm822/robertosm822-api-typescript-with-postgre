@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const product_entity_1 = require("@/entities/product.entity");
-const connection_1 = __importDefault(require("@/database/connection"));
+const product_entity_1 = require("../entities/product.entity");
+const connection_1 = __importDefault(require("../database/connection"));
 const class_validator_1 = require("class-validator");
-const product_repository_1 = require("@/repositories/product.repository");
-const create_product_dto_1 = __importDefault(require("@/dto/create.product.dto"));
-const update_product_dto_1 = require("@/dto/update.product.dto");
+const product_repository_1 = require("../repositories/product.repository");
+const create_product_dto_1 = __importDefault(require("../dto/create.product.dto"));
+const update_product_dto_1 = require("../dto/update.product.dto");
 class ProductController {
     constructor() {
         this.findAll = async (request, response) => {

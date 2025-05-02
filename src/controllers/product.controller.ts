@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { Product } from "@/entities/product.entity";
-import AppDataSource from "@/database/connection";
+import { Product } from "../entities/product.entity";
+import AppDataSource from "../database/connection";
 import { validate } from "class-validator";
-import { ProductRepository } from "@/repositories/product.repository";
-import CreateProductDTO from "@/dto/create.product.dto";
-import { UpdateProductDTO } from "@/dto/update.product.dto";
+import { ProductRepository } from "../repositories/product.repository";
+import CreateProductDTO from "../dto/create.product.dto";
+import { UpdateProductDTO } from "../dto/update.product.dto";
 
 class ProductController {
   private productRepository: ProductRepository;

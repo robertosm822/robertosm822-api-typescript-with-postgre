@@ -9,6 +9,7 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const fs_1 = __importDefault(require("fs"));
 const dotenv_1 = __importDefault(require("dotenv"));
+// import { Product } from "../entities/product.entity";
 dotenv_1.default.config();
 // Leitura do certificado CA para SSL
 const caCert = fs_1.default.readFileSync(".certs/ca-server-postgres.pem").toString();

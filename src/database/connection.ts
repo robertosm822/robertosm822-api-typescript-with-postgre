@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import fs from "fs";
 import dotenv from 'dotenv'
-import { Product } from "../entities/product.entity";
+// import { Product } from "../entities/product.entity";
 dotenv.config();
 
 // Leitura do certificado CA para SSL
